@@ -78,6 +78,11 @@ public class P4Print extends SCM {
                 ws = ws.replace("\\", "\\\\");
             }
 
+            File directory = new File(ws);
+            if (! directory.exists()){
+                directory.mkdir();
+            }
+
             String toFile = Paths.get(ws, localFile).toString();
 
             saveToFile(toFile, printResult);
