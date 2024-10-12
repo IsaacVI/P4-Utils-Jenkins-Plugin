@@ -3,6 +3,7 @@
     <f:section title="P4 Print Settings" name="p4print">
         <f:entry title="P4 Server" field="p4server">
             <f:textbox/>
+            <f:description>Use prefix p4java:// or p4javassl://</f:description>
         </f:entry>
         <f:entry title="P4 Login" field="p4login">
             <f:textbox/>
