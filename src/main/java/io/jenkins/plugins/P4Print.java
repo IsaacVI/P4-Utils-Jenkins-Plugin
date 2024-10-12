@@ -73,20 +73,17 @@ public class P4Print extends SCM {
             InputStream printResult = server.getFileContents(fileSpecs, printOptions);
 
             String ws = workspace.getRemote();
-            if(ws.matches("^[A-Z]:.*$"))
-            {
-                ws = ws.replace("\\", "\\\\");
-            }
 
-            File directory = new File(ws);
-            if (! directory.exists()){
-                directory.mkdir();
-            }
+            createFolderRecursively(ws);
 
             String toFile = Paths.get(ws, localFile).toString();
 
-            saveToFile(toFile, printResult);
-            listener.getLogger().println("P4 Print -File saved to: " + toFile);
+            File folder = new File(toFile);
+            createFolderRecursively(folder.getParentFile().getPath());
+
+            saveToFile(toFile, printResult, listener);
+
+            listener.getLogger().println("P4 Print - File saved to: " + toFile);
         }
         catch (Exception e)
         {
@@ -103,16 +100,35 @@ public class P4Print extends SCM {
         }
     }
 
-    private static void saveToFile(String fileName, InputStream inputStream) {
-        try (FileOutputStream outputStream = new FileOutputStream(fileName)) {
-            byte[] buffer = new byte[8192];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
-            }
-        } catch (IOException e) {
-            System.err.println("Error writing to file: " + e.getMessage());
+    public static boolean createFolderRecursively(String folderPath) {
+        File folder = new File(folderPath);
+
+        if (folder.exists()) {
+            return true;
         }
+
+        File parentFolder = folder.getParentFile();
+        if (parentFolder != null && !parentFolder.exists()) {
+            if (!createFolderRecursively(parentFolder.getPath())) {
+                return false;
+            }
+        }
+
+        if (folder.mkdir()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private static void saveToFile(String fileName, InputStream inputStream, TaskListener listener) throws IOException {
+        FileOutputStream outputStream = new FileOutputStream(fileName);
+        byte[] buffer = new byte[8192];
+        int bytesRead;
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, bytesRead);
+        }
+        outputStream.close();
     }
 
     @Override
