@@ -1,1 +1,3 @@
-# P4-Print-Jenkins-Plugin
+# P4 Print Jenkins Plugin
+
+Created by Mikołaj Kurcin
