@@ -1,0 +1,14 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+    <f:section title="P4 Print Settings" name="p4print">
+        <f:entry title="P4 Server" field="p4server">
+            <f:textbox/>
+        </f:entry>
+        <f:entry title="P4 Login" field="p4login">
+            <f:textbox/>
+        </f:entry>
+        <f:entry title="P4 Password" field="p4password">
+            <f:password/>
+        </f:entry>
+    </f:section>
+</j:jelly>
