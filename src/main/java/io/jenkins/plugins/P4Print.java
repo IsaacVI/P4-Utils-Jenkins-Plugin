@@ -4,6 +4,7 @@ import com.perforce.p4java.impl.generic.core.file.FileSpec;
 import com.perforce.p4java.option.server.GetFileContentsOptions;
 import com.perforce.p4java.server.IOptionsServer;
 import com.perforce.p4java.server.ServerFactory;
+import com.perforce.p4java.option.server.TrustOptions;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.Launcher;
@@ -60,7 +61,22 @@ public class P4Print extends SCM {
             String p4login = ((DescriptorImpl) getDescriptor()).getP4login();
             String p4password = ((DescriptorImpl) getDescriptor()).getP4password();
 
+            if(p4server.startsWith("ssl:"))
+            {
+                p4server = "p4javassl://" + p4server.substring("ssl:".length());
+            }
+
+            if(!p4server.startsWith("p4java://") || !p4server.startsWith("p4javassl://"))
+            {
+                p4server = "p4java://" + p4server;
+            }
+
             server = ServerFactory.getOptionsServer(p4server, null);
+
+            if(p4server.startsWith("p4javassl://")) {
+                server.addTrust(new TrustOptions().setAutoAccept(true));
+            }
+
             server.connect();
 
             server.setUserName(p4login);
