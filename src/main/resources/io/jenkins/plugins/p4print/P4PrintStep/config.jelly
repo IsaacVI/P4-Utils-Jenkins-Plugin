@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+
+    <f:entry title="P4 File Depot Path" field="p4FilePath">
+        <f:textbox/>
+    </f:entry>
+    <f:entry title="To file" field="toFile">
+        <f:checkbox/>
+    </f:entry>
+    <f:entry title="Local File" field="localFile">
+        <f:textbox/>
+    </f:entry>
+</j:jelly>

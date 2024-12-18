@@ -1,6 +1,7 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
-    <f:section title="P4 Print Settings" name="p4print">
+
+    <f:section title="P4 Print Settings">
         <f:entry title="P4 Server" field="p4server">
             <f:textbox/>
             <f:description>Use prefix p4java:// or p4javassl://</f:description>
@@ -12,4 +13,5 @@
             <f:password/>
         </f:entry>
     </f:section>
+
 </j:jelly>

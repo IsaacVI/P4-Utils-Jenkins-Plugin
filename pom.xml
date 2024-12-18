@@ -59,7 +59,21 @@
             <artifactId>p4java</artifactId>
             <version>2024.1.2612262</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.jenkins-ci.plugins.workflow</groupId>
+            <artifactId>workflow-api</artifactId>
+            <version>1336.vee415d95c521</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins.workflow</groupId>
+            <artifactId>workflow-step-api</artifactId>
+            <version>678.v3ee58b_469476</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>script-security</artifactId>
+            <version>1369.v9b_98a_4e95b_2d</version>
+        </dependency>
     </dependencies>
 
     <repositories>
