@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+
+    <f:entry title="Change List" field="changeList">
+        <f:textbox/>
+    </f:entry>
+    <f:entry title="Check on shelve" field="shelve">
+        <f:checkbox/>
+    </f:entry>
+    <f:entry title="Match Type" field="matchType">
+        <select name="matchType">
+            <option value="endsWith">Ends With</option>
+            <option value="startsWith">Starts With</option>
+            <option value="contains">Contains</option>
+            <option value="regex">Regex</option>
+        </select>
+    </f:entry>
+    <f:entry title="Files Match Scope" field="matchScope">
+        <select name="matchScope">
+            <option value="any">Any</option>
+            <option value="all">All</option>
+            <option value="none">None</option>
+        </select>
+    </f:entry>
+    <f:entry field="patterns" title="Patterns">
+        <f:repeatable name="patterns" var="patterns"
+                      items="${instance.patterns}" minimum="1" add="Add Patterns">
+            <table width="100%">
+                <tr>
+                    <td width="80%">
+                        <f:textbox name="pattern"/>
+                    </td>
+                    <td width="auto">
+                        <f:repeatableDeleteButton/>
+                    </td>
+                </tr>
+            </table>
+        </f:repeatable>
+    </f:entry>
+</j:jelly>
