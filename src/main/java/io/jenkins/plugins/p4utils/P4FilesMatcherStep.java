@@ -1,9 +1,6 @@
-package io.jenkins.plugins.p4print;
+package io.jenkins.plugins.p4utils;
 
-import com.perforce.p4java.core.IChangelist;
 import com.perforce.p4java.core.file.IFileSpec;
-import com.perforce.p4java.impl.generic.core.file.FilePath;
-import com.perforce.p4java.option.server.ChangelistOptions;
 import com.perforce.p4java.server.IOptionsServer;
 import hudson.Extension;
 import hudson.model.TaskListener;

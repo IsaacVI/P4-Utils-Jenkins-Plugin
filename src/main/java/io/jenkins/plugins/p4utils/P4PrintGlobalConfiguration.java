@@ -1,4 +1,4 @@
-package io.jenkins.plugins.p4print;
+package io.jenkins.plugins.p4utils;
 
 import hudson.Extension;
 import jenkins.model.GlobalConfiguration;

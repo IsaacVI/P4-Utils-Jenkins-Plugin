@@ -1,4 +1,4 @@
-package io.jenkins.plugins.p4print;
+package io.jenkins.plugins.p4utils;
 
 import com.perforce.p4java.server.IOptionsServer;
 import hudson.Extension;
@@ -9,7 +9,7 @@ import hudson.model.PersistentDescriptor;
 import hudson.model.Run;
 import hudson.model.TaskListener;
 import hudson.scm.*;
-import io.jenkins.plugins.p4print.ChangeLog;
+import io.jenkins.plugins.p4utils.ChangeLog;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;

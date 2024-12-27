@@ -1,4 +1,4 @@
-package io.jenkins.plugins.p4print;
+package io.jenkins.plugins.p4utils;
 
 import com.perforce.p4java.core.file.IFileSpec;
 import com.perforce.p4java.exception.P4JavaException;
