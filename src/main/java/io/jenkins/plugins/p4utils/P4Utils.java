@@ -22,7 +22,7 @@ public class P4Utils {
             p4server = "p4javassl://" + p4server.substring("ssl:".length());
         }
 
-        if(!p4server.startsWith("p4java://") || !p4server.startsWith("p4javassl://"))
+        if(!p4server.startsWith("p4java://") && !p4server.startsWith("p4javassl://"))
         {
             p4server = "p4java://" + p4server;
         }
