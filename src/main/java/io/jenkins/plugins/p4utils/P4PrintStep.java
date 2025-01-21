@@ -3,6 +3,7 @@ package io.jenkins.plugins.p4utils;
 import com.perforce.p4java.server.IOptionsServer;
 import hudson.Extension;
 import hudson.FilePath;
+import hudson.model.Computer;
 import hudson.model.TaskListener;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -67,30 +68,26 @@ public class P4PrintStep extends Step {
             catch (Exception e) {}
 
             try {
-                P4PrintGlobalConfiguration globalConfig = P4PrintGlobalConfiguration.get();
-                String p4server = globalConfig.getP4server();
-                String p4login = globalConfig.getP4login();
-                String p4password = globalConfig.getP4password();
-
-
-                server = P4Utils.connectToPerforce(p4server, p4login, p4password);
-                InputStream printResult = P4Utils.getP4PrintInputStream(server, p4FilePath);
 
                 if(toFile) {
                     FilePath workspace = getContext().get(FilePath.class);
-                    String ws = workspace.getRemote();
-
-                    P4Utils.createFolderRecursively(ws);
-
-                    String saveToFile = Paths.get(ws, localFile).toString();
-
-                    File folder = new File(saveToFile);
-                    P4Utils.createFolderRecursively(folder.getParentFile().getPath());
-                    P4Utils.saveToFile(saveToFile, printResult, listener);
-                    listener.getLogger().println("P4 Print - File saved to: " + saveToFile);
+                    Computer computer = getContext().get(Computer.class);
+                    P4PrintGlobalConfiguration configuration = P4PrintGlobalConfiguration.get();
+                    computer.getChannel().call(new P4PrintToFileCallable(Paths.get(workspace.getRemote(),
+                            localFile).toString(), p4FilePath, listener, configuration.p4server, configuration.p4login,
+                            configuration.p4password));
                     return "OK!" ;
                 }
                 else {
+                    P4PrintGlobalConfiguration globalConfig = P4PrintGlobalConfiguration.get();
+                    String p4server = globalConfig.getP4server();
+                    String p4login = globalConfig.getP4login();
+                    String p4password = globalConfig.getP4password();
+
+
+                    server = P4Utils.connectToPerforce(p4server, p4login, p4password);
+                    InputStream printResult = P4Utils.getP4PrintInputStream(server, p4FilePath);
+
                     listener.getLogger().println("P4 Print OK!");
                     return P4Utils.convertInputStreamToString(printResult);
                 }
