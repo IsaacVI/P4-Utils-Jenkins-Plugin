@@ -1,13 +1,10 @@
 package io.jenkins.plugins.p4utils;
 
-import com.perforce.p4java.server.IOptionsServer;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.model.*;
 import hudson.scm.*;
-import io.jenkins.plugins.p4utils.ChangeLog;
-import jenkins.model.Jenkins;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;

@@ -11,7 +11,6 @@ import javax.annotation.Nonnull;
 import org.jenkinsci.plugins.workflow.steps.*;
 import org.kohsuke.stapler.StaplerRequest;
 
-import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.*;
@@ -68,22 +67,20 @@ public class P4PrintStep extends Step {
             catch (Exception e) {}
 
             try {
+                P4PrintGlobalConfiguration globalConfig = P4PrintGlobalConfiguration.get();
+                String p4server = globalConfig.getP4server();
+                String p4login = globalConfig.getP4login();
+                String p4password = globalConfig.getP4password();
 
                 if(toFile) {
                     FilePath workspace = getContext().get(FilePath.class);
                     Computer computer = getContext().get(Computer.class);
-                    P4PrintGlobalConfiguration configuration = P4PrintGlobalConfiguration.get();
                     computer.getChannel().call(new P4PrintToFileCallable(Paths.get(workspace.getRemote(),
-                            localFile).toString(), p4FilePath, listener, configuration.p4server, configuration.p4login,
-                            configuration.p4password));
+                            localFile).toString(), p4FilePath, listener, p4server, p4login,
+                            p4password));
                     return "OK!" ;
                 }
                 else {
-                    P4PrintGlobalConfiguration globalConfig = P4PrintGlobalConfiguration.get();
-                    String p4server = globalConfig.getP4server();
-                    String p4login = globalConfig.getP4login();
-                    String p4password = globalConfig.getP4password();
-
 
                     server = P4Utils.connectToPerforce(p4server, p4login, p4password);
                     InputStream printResult = P4Utils.getP4PrintInputStream(server, p4FilePath);
