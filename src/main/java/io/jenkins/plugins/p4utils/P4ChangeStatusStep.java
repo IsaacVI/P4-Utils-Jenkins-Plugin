@@ -88,12 +88,12 @@ public class P4ChangeStatusStep extends Step {
 
         @Override
         public String getFunctionName() {
-            return "p4change";
+            return "p4changeStatus";
         }
 
         @Override
         public String getDisplayName() {
-            return "P4 Change";
+            return "P4 Change Status";
         }
 
         @Override
@@ -104,7 +104,7 @@ public class P4ChangeStatusStep extends Step {
         @Override
         public boolean configure(final StaplerRequest req, final JSONObject json)
                 throws hudson.model.Descriptor.FormException {
-            req.bindJSON(this, json.getJSONObject("p4change"));
+            req.bindJSON(this, json.getJSONObject("p4changeStatus"));
             return true;
         }
     }
