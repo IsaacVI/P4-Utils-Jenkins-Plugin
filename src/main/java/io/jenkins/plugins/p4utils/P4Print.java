@@ -97,4 +97,8 @@ public class P4Print extends SCM {
             return true;
         }
     }
+
+    public class ChangeLog extends ChangeLogParser {
+
+    }
 }
