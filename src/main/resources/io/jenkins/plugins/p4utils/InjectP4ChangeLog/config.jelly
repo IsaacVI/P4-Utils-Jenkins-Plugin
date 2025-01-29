@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+    <f:entry title="Changes Range" field="changesRange"
+             description="Range use to get changes, for example //depot/game/...@123,345">
+        <f:textbox/>
+    </f:entry>
+    <f:entry title="P4 Client" field="p4client" description="Client to set up, leave blank to skip">
+        <f:textbox/>
+    </f:entry>
+    <f:entry title="Limit" field="limitChanges" description="Limit amount of changelist, leave blank for no limit">
+        <f:textbox default="100"/>
+    </f:entry>
+
+
+</j:jelly>

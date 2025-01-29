@@ -1,0 +1,25 @@
+<?jelly escape-by-default='true'?>
+<!--
+  Displays the Git change log digest for the build top page
+  when a build history link (or number) is followed
+  e.g https://<jenkins_url>/job/<project>/<build number>/
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <j:set var="browser" value="${it.browser}"/>
+
+    <j:choose>
+        <j:when test="${it.emptySet}">
+            No changes.
+        </j:when>
+        <j:otherwise>
+            Changes:
+            <ul>
+                <j:forEach var="entry" items="${it.entries}">
+                    <li>
+                        ${entry.commitId} - ${entry.author} - ${entry.msg}
+                    </li>
+                </j:forEach>
+            </ul>
+        </j:otherwise>
+    </j:choose>
+</j:jelly>

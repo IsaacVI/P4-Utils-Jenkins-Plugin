@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+
+        <h1>Zmiany w tym buildzie:</h1>
+                    <j:forEach var="entry" items="${it.entries}">
+                        <div>
+                            <h3>Change ${entry.commitId} by ${entry.author} on ${entry.date}</h3>
+                            <h4>${entry.msg}</h4>
+                            <ul>
+                                <j:forEach var="file" items="${entry.affectedPaths}">
+                                    <li>${file}</li>
+                                </j:forEach>
+                            </ul>
+                        </div>
+                    </j:forEach>
+
+</j:jelly>
