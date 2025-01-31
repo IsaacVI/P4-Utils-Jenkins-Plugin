@@ -8,7 +8,7 @@
                             <h3>Change ${entry.commitId} by ${entry.author} on ${entry.date}</h3>
                             <h4>${entry.msg}</h4>
                             <ul>
-                                <j:forEach var="file" items="${entry.affectedPaths}">
+                                <j:forEach var="file" items="${entry.files}">
                                     <li>${file}</li>
                                 </j:forEach>
                             </ul>

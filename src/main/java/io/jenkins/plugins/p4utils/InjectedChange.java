@@ -6,10 +6,10 @@ public class InjectedChange {
     private String author;
     private String id;
     private String description;
-    private List<String> files;
+    private List<InjectedChangeLogAffectedFile> files;
     private long timestamp;
 
-    public InjectedChange (String author, String id, String description, List<String> files, long timestamp) {
+    public InjectedChange (String author, String id, String description, List<InjectedChangeLogAffectedFile> files, long timestamp) {
         this.author = author;
         this.id = id;
         this.description = description;
@@ -43,11 +43,11 @@ public class InjectedChange {
         this.description = description;
     }
 
-    public List<String> getFiles() {
+    public List<InjectedChangeLogAffectedFile> getFiles() {
         return files;
     }
 
-    public void setFiles(List<String> files) {
+    public void setFiles(List<InjectedChangeLogAffectedFile> files) {
         this.files = files;
     }
 

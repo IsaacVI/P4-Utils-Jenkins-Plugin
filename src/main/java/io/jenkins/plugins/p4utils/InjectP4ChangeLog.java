@@ -3,6 +3,7 @@ package io.jenkins.plugins.p4utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.perforce.p4java.core.IChangelist;
 import com.perforce.p4java.core.IChangelistSummary;
+import com.perforce.p4java.core.file.FileAction;
 import com.perforce.p4java.core.file.FileSpecBuilder;
 import com.perforce.p4java.core.file.IFileSpec;
 import com.perforce.p4java.impl.generic.core.file.FileSpec;
@@ -86,7 +87,7 @@ public class InjectP4ChangeLog extends Builder implements SimpleBuildStep {
                     changelists.add(new InjectedChange(c.getUsername(),
                             String.valueOf(c.getId()),
                             c.getDescription().replace("\n", " "),
-                            files.stream().map(x->x.getDepotPathString()).toList(),
+                            files.stream().map(x->new InjectedChangeLogAffectedFile(x.getDepotPathString(), x.getAction())).toList(),
                             c.getDate().getTime()));
                 }
                 ObjectMapper objectMapper = new ObjectMapper();
